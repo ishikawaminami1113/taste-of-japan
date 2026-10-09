@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taste of Japan — Restaurant Guide for Visitors</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍣</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<!-- ★ AdSense 承認後、この中身を外して広告コードを貼る（Auto Ads ならこれだけでOK）
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+     crossorigin="anonymous"></script>
+-->
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#home" class="brand">
+      🍣 Taste of Japan <span class="brand__sub">日本のグルメ案内</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="nav-menu" id="navMenu">
+      <a href="#restaurants" class="nav-link">Restaurants</a>
+      <a href="#guide" class="nav-link">Food Guide</a>
+      <a href="#etiquette" class="nav-link">Etiquette</a>
+      <a href="#phrases" class="nav-link">Phrases</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="about.html" class="nav-link">About</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="container">
+    <p class="hero__eyebrow">Tokyo dining guide · for international visitors</p>
+    <h1>Japanese restaurant guide</h1>
+    <p class="hero__lede">
+      Fourteen restaurants in Tokyo, from ¥550 bowls of udon to ¥20,000 kaiseki.
+      Prices, ratings and practical notes for eating out in Japan.
+    </p>
+    <p class="hero__links">
+      Browse:
+      <a href="#restaurants" data-cat="sushi">Sushi</a> ·
+      <a href="#restaurants" data-cat="ramen">Ramen</a> ·
+      <a href="#restaurants" data-cat="izakaya">Izakaya</a> ·
+      <a href="#restaurants" data-cat="tempura">Tempura</a> ·
+      <a href="#restaurants" data-cat="wagyu">Wagyu</a> ·
+      <a href="#restaurants" data-cat="kaiseki">Kaiseki</a> ·
+      <a href="#restaurants" data-cat="cafe">Café</a>
+    </p>
+  </div>
+</section>
+
+<main>
+
+<section class="section" id="restaurants">
+  <div class="container">
+    <header class="section-head">
+      <h2 class="section-title">Restaurants</h2>
+      <p class="featured-line">
+        Featured: <button class="linklike" id="featuredLink">Sushi Kaze</button> —
+        a 10-seat omakase counter in Ginza. 12 seasonal courses from ¥8,000.
+      </p>
+    </header>
+
+    <div class="filters">
+      <input type="search" id="searchInput" placeholder="Search name, dish or tag…" aria-label="Search restaurants">
+      <select id="cuisineSelect" aria-label="Cuisine"></select>
+      <select id="areaSelect" aria-label="Area"></select>
+      <select id="budgetSelect" aria-label="Budget">
+        <option value="all">Any budget</option>
+        <option value="1">$ · under ¥1,000</option>
+        <option value="2">$$ · ¥1,000–3,000</option>
+        <option value="3">$$$ · ¥3,000+</option>
+      </select>
+      <select id="sortSelect" aria-label="Sort">
+        <option value="popular">Most reviewed</option>
+        <option value="rating">Top rated</option>
+        <option value="priceAsc">Price ↑</option>
+        <option value="priceDesc">Price ↓</option>
+      </select>
+    </div>
+
+    <p class="result-count" id="resultCount" aria-live="polite"></p>
+    <ul class="resto-list" id="restaurantList"></ul>
+
+    <!-- ★ AdSense 広告枠（承認後に下のコードを有効化。Auto Ads なら不要）
+    <div class="ad-slot">
+      <ins class="adsbygoogle" style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="YYYYYYYYYY"
+           data-ad-format="auto"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    -->
+  </div>
+</section>
+
+<section class="section section--tint" id="guide">
+  <div class="container">
+    <header class="section-head">
+      <h2 class="section-title">Food guide</h2>
+      <p class="section-lede">The basics of Japanese dining, in plain English.</p>
+    </header>
+    <ol class="guide-list">
+      <li>
+        <span class="guide-list__emoji">🍣</span>
+        <div><h3>Sushi</h3>
+        <p>Vinegared rice with fresh seafood, from conveyor-belt chains to ¥20,000 counters. Nigiri is the classic single piece.</p>
+        <p class="guide-list__try">Must-try: otoro (fatty tuna)</p></div>
+      </li>
+      <li>
+        <span class="guide-list__emoji">🍜</span>
+        <div><h3>Ramen</h3>
+        <p>Wheat noodles in rich regional broths — tonkotsu (pork), shoyu (soy), miso. Slurping is a compliment.</p>
+        <p class="guide-list__try">Must-try: tonkotsu with extra chashu</p></div>
+      </li>
+      <li>
+        <span class="guide-list__emoji">🍤</span>
+        <div><h3>Tempura</h3>
+        <p>Seafood and vegetables in a light batter, fried to order. Eat with tentsuyu sauce and grated daikon.</p>
+        <p class="guide-list__try">Must-try: anago (sea eel)</p></div>
+      </li>
+      <li>
+        <span class="guide-list__emoji">🍢</span>
+        <div><h3>Izakaya</h3>
+        <p>Japan's pub culture: small shared plates, yakitori skewers and drinks. Order a few things and pass them around.</p>
+        <p class="guide-list__try">Must-try: yakitori with cold sake</p></div>
+      </li>
+      <li>
+        <span class="guide-list__emoji">🍁</span>
+        <div><h3>Kaiseki</h3>
+        <p>Multi-course haute cuisine that follows the seasons — tiny, beautiful dishes in a calm traditional room.</p>
+        <p class="guide-list__try">Must-try: the seasonal set menu</p></div>
+      </li>
+      <li>
+        <span class="guide-list__emoji">🥩</span>
+        <div><h3>Wagyu</h3>
+        <p>Intensely marbled Japanese beef, grilled at your table (yakiniku) or as sukiyaki. Look for A4/A5 grades.</p>
+        <p class="guide-list__try">Must-try: A5 tongue at yakiniku</p></div>
+      </li>
+      <li>
+        <span class="guide-list__emoji">🍝</span>
+        <div><h3>Soba &amp; Udon</h3>
+        <p>Buckwheat soba (nutty, firm) and thick wheat udon (soft, comforting) — hot or cold by season.</p>
+        <p class="guide-list__try">Must-try: cold zaru soba in summer</p></div>
+      </li>
+      <li>
+        <span class="guide-list__emoji">🍵</span>
+        <div><h3>Matcha &amp; sweets</h3>
+        <p>Stone-ground green tea served traditionally or as a latte, paired with wagashi and parfaits.</p>
+        <p class="guide-list__try">Must-try: matcha parfait</p></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="etiquette">
+  <div class="container">
+    <header class="section-head">
+      <h2 class="section-title">Dining etiquette</h2>
+      <p class="section-lede">A few simple rules that help you blend in.</p>
+    </header>
+    <div class="etiquette-cols">
+      <div>
+        <h3 class="etiquette-hd do">✓ Do</h3>
+        <ul class="rule-list">
+          <li><b>Slurp your noodles.</b> For ramen, soba and udon it shows enjoyment and cools them.</li>
+          <li><b>Say itadakimasu</b> before eating and “gochisousama deshita” after.</li>
+          <li><b>Carry cash.</b> Many small shops and ramen counters are cash-only.</li>
+          <li><b>Slip off your shoes</b> where you see a genkan (entry step) and slipper signs.</li>
+          <li><b>Book ahead for omakase</b> and kaiseki — often 1–2 weeks in advance.</li>
+          <li><b>Keep voices low,</b> especially at counter seats and on trains.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="etiquette-hd dont">✗ Don't</h3>
+        <ul class="rule-list">
+          <li><b>Don't tip.</b> Service is included; money on the table can confuse staff.</li>
+          <li><b>Don't stand chopsticks in rice</b> or pass food chopstick-to-chopstick — both are funeral customs.</li>
+          <li><b>Don't eat while walking,</b> except at festivals and market streets.</li>
+          <li><b>Don't talk on the phone.</b> Switch to silent mode; step outside to call.</li>
+          <li><b>Don't blow your nose at the table</b> — excuse yourself to the restroom.</li>
+          <li><b>Don't return plates</b> to the conveyor belt at kaiten-zushi; leave them on your table.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint" id="phrases">
+  <div class="container">
+    <header class="section-head">
+      <h2 class="section-title">Mini phrasebook</h2>
+      <p class="section-lede">Pronunciation is written to be read aloud. Even one phrase earns big smiles.</p>
+    </header>
+    <table class="phrase-table">
+      <thead>
+        <tr><th>Japanese</th><th>Sounds like</th><th>Meaning</th><th>Use it when…</th></tr>
+      </thead>
+      <tbody>
+        <tr><td lang="ja">すみません</td><td>su-mi-ma-sen</td><td>Excuse me / Sorry</td><td>getting a server's attention</td></tr>
+        <tr><td lang="ja">おすすめは？</td><td>o-susume wa?</td><td>What do you recommend?</td><td>you can't decide</td></tr>
+        <tr><td lang="ja">英語のメニューはありますか？</td><td>ei-go no menyu wa a-ri-ma-su ka?</td><td>Do you have an English menu?</td><td>entering any restaurant</td></tr>
+        <tr><td lang="ja">これをください</td><td>ko-re o ku-da-sai</td><td>This one, please</td><td>pointing at a menu or display</td></tr>
+        <tr><td lang="ja">お勘定をお願いします</td><td>o-kan-jou o o-ne-gai-shi-ma-su</td><td>The check, please</td><td>ready to leave</td></tr>
+        <tr><td lang="ja">おいしい！</td><td>o-i-shi-i!</td><td>Delicious!</td><td>after the first bite</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="container">
+    <header class="section-head">
+      <h2 class="section-title">FAQ</h2>
+      <p class="section-lede">Quick answers to what travelers ask most.</p>
+    </header>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Do I need to speak Japanese?</summary>
+        <p>No. Most listings here have English or picture menus, and major stations have English signage. A smile and pointing work wonders.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do I need a reservation?</summary>
+        <p>Counter sushi, kaiseki and popular wagyu places — yes, often days ahead. Ramen shops, izakayas and curry houses are usually walk-in; expect a short wait at peak lunch (12:00–13:00).</p>
+      </details>
+      <details class="faq-item">
+        <summary>Are there vegetarian or vegan options?</summary>
+        <p>Yes — filter by the “Vegetarian” tag. Note that dashi (stock) is usually made from bonito flakes, so strict vegans should ask about dashi.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I pay by credit card?</summary>
+        <p>Chains and newer restaurants usually accept Visa/Mastercard and mobile pay. Many small, traditional shops are cash-only.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is tipping expected?</summary>
+        <p>No — never tip. It can cause confusion or even polite refusal. Great service is part of the job here.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How do I get there?</summary>
+        <p>Open any restaurant's details and tap “Show on map”. Each listing names its nearest station and walking time.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="footer__brand">🍣 Taste of Japan</p>
+    <p class="footer__note">A sample demo site for introducing Japanese restaurants to overseas visitors. All restaurants are illustrative examples with fictional addresses.</p>
+    <p class="footer__links"><a href="about.html">About</a> · <a href="privacy.html">Privacy Policy</a> · <a href="index.html#faq">FAQ</a></p>
+    <p class="footer__copy">© 2026 Taste of Japan</p>
+  </div>
+</footer>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal__overlay" id="modalOverlay"></div>
+  <div class="modal__panel" role="dialog" aria-modal="true">
+    <button class="modal__close" id="modalClose" aria-label="Close">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

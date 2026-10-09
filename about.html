@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Taste of Japan</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍣</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">🍣 Taste of Japan <span class="brand__sub">日本のグルメ案内</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="nav-menu" id="navMenu">
+      <a href="index.html#restaurants" class="nav-link">Restaurants</a>
+      <a href="index.html#guide" class="nav-link">Food Guide</a>
+      <a href="index.html#etiquette" class="nav-link">Etiquette</a>
+      <a href="index.html#phrases" class="nav-link">Phrases</a>
+      <a href="index.html#faq" class="nav-link">FAQ</a>
+      <a href="about.html" class="nav-link">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="section">
+  <div class="container" style="max-width:720px">
+    <header class="section-head">
+      <h1 class="section-title">About this site</h1>
+    </header>
+
+    <h2 class="sub-title">What is Taste of Japan?</h2>
+    <p>A restaurant guide that introduces Japanese dining to overseas visitors. Japanese food has more variety — and more unwritten rules — than most travelers expect. This site explains restaurants, prices, etiquette and useful phrases in plain English.</p>
+
+    <h2 class="sub-title">What's inside</h2>
+    <ul class="plain-list">
+      <li>A directory of restaurants with prices, ratings and access info</li>
+      <li>A food guide for first-timers (sushi, ramen, tempura, kaiseki…)</li>
+      <li>Dining etiquette: the DOs and DON'Ts</li>
+      <li>A mini phrasebook and FAQ</li>
+    </ul>
+
+    <h2 class="sub-title">Contact</h2>
+    <p>Corrections, requests and partnership inquiries: <a href="mailto:you@example.com">you@example.com</a> <em>(replace with your own address)</em></p>
+
+    <h2 class="sub-title">Note</h2>
+    <p>This is a demo project. The restaurants shown are illustrative examples with fictional addresses. Before publishing for real, replace <b>js/data.js</b> with accurate information about real restaurants.</p>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="footer__brand">🍣 Taste of Japan</p>
+    <p class="footer__note">A sample demo site for introducing Japanese restaurants to overseas visitors.</p>
+    <p class="footer__links"><a href="about.html">About</a> · <a href="privacy.html">Privacy Policy</a> · <a href="index.html#faq">FAQ</a></p>
+    <p class="footer__copy">© 2026 Taste of Japan</p>
+  </div>
+</footer>
+
+<script>
+document.getElementById("navToggle").addEventListener("click", function () {
+  document.getElementById("navMenu").classList.toggle("open");
+});
+</script>
+</body>
+</html>
