@@ -89,21 +89,21 @@ button{font:inherit;cursor:pointer}
   min-height:360px;
 }
 .hero__circle{
-  width:280px;
-  height:280px;
+  width:300px;
+  height:300px;
   border-radius:50%;
-  background:
-    radial-gradient(circle at 30% 30%,rgba(255,255,255,.6) 0%,transparent 60%),
-    linear-gradient(135deg,#c8452c 0%,#e0523f 30%,#d98e4a 60%,#c9963b 100%);
+  background-color:#c8452c;
+  background-image:
+    linear-gradient(180deg,rgba(26,26,24,0) 45%,rgba(26,26,24,.4) 100%),
+    url('https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800&q=80&auto=format');
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:0 24px 48px rgba(200,69,44,.28),inset 0 0 0 12px rgba(255,253,248,.5);
+  box-shadow:0 24px 48px rgba(0,0,0,.22),inset 0 0 0 12px rgba(255,253,248,.85);
   animation:heroFloat 6s ease-in-out infinite;
-}
-.hero__emoji{
-  font-size:120px;
-  filter:drop-shadow(0 8px 16px rgba(0,0,0,.25));
 }
 .hero__float{
   position:absolute;
@@ -408,8 +408,7 @@ button{font:inherit;cursor:pointer}
   .hero__lede{margin-inline:auto}
   .hero__links{margin-inline:auto}
   .hero__visual{order:-1;min-height:240px}
-  .hero__circle{width:200px;height:200px}
-  .hero__emoji{font-size:80px}
+  .hero__circle{width:210px;height:210px}
   .hero__float{font-size:32px}
   .hero h1{font-size:1.9rem}
   .hero__lede{font-size:.98rem}
