@@ -1,4 +1,4 @@
-/* Taste of Japan — main script (v4, polished) */
+/* Taste of Japan — main script (v5, polished) */
 (function () {
   "use strict";
 
@@ -18,6 +18,19 @@
   var navMenu = document.getElementById("navMenu");
 
   var state = { category: "all", area: "all", budget: "all", sort: "popular", query: "" };
+
+  /* ---------- favorites ---------- */
+  function getFavs() {
+    try { return JSON.parse(localStorage.getItem("toj_favs") || "[]"); } catch(e) { return []; }
+  }
+  function toggleFav(id) {
+    var favs = getFavs();
+    var idx = favs.indexOf(id);
+    if (idx === -1) favs.push(id); else favs.splice(idx, 1);
+    localStorage.setItem("toj_favs", JSON.stringify(favs));
+    return idx === -1;
+  }
+  function isFav(id) { return getFavs().indexOf(id) !== -1; }
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
@@ -91,8 +104,9 @@
 
   /* ---------- list ---------- */
   function rowHTML(r) {
+    var fav = isFav(r.id) ? " fav" : "";
     return (
-      '<li class="resto" data-id="' + r.id + '" tabindex="0" role="button" aria-label="Details for ' + esc(r.name) + '">' +
+      '<li class="resto' + fav + '" data-id="' + r.id + '" tabindex="0" role="button" aria-label="Details for ' + esc(r.name) + '">' +
         '<span class="resto__icon" style="--h:' + r.hue + '">' + r.emoji + "</span>" +
         '<div class="resto__main">' +
           '<div class="resto__name">' + esc(r.name) + '<span class="jp">' + esc(r.jp) + "</span></div>" +
@@ -100,6 +114,7 @@
         "</div>" +
         '<div class="resto__rating"><span class="star">★</span> ' + r.rating.toFixed(1) + " <small>(" + r.reviews + ")</small></div>" +
         '<div class="resto__price"><b>' + "$".repeat(r.price) + "</b><br>" + priceText(r) + "</div>" +
+        '<button class="resto__fav' + fav + '" data-fav="' + r.id + '" aria-label="Toggle favorite" title="Favorite">' + (isFav(r.id) ? "♥" : "♡") + "</button>" +
       "</li>"
     );
   }
@@ -120,7 +135,8 @@
     list.innerHTML = rows.map(rowHTML).join("");
 
     list.querySelectorAll(".resto").forEach(function (row) {
-      row.addEventListener("click", function () {
+      row.addEventListener("click", function (e) {
+        if (e.target.closest("[data-fav]")) return;
         openModal(Number(row.dataset.id));
       });
       row.addEventListener("keydown", function (e) {
@@ -128,6 +144,18 @@
           e.preventDefault();
           openModal(Number(row.dataset.id));
         }
+      });
+    });
+    list.querySelectorAll("[data-fav]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var id = Number(btn.dataset.fav);
+        var added = toggleFav(id);
+        btn.textContent = added ? "♥" : "♡";
+        btn.classList.toggle("fav", added);
+        row.closest ? null : null;
+        var rowEl = btn.closest(".resto");
+        if (rowEl) rowEl.classList.toggle("fav", added);
       });
     });
   }
@@ -177,6 +205,7 @@
         '<div class="modal__tags">' + r.tags.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("") + "</div>" +
         '<div class="modal__actions">' +
           '<a class="btn btn--primary" href="' + mapURL + '" target="_blank" rel="noopener">Show on map</a>' +
+          '<button class="btn btn--ghost" id="modalFav">' + (isFav(r.id) ? "♥ Favorited" : "♡ Add to favorites") + '</button>' +
           '<button class="btn btn--ghost" id="modalBack">Close</button>' +
         "</div>" +
       "</div>";
@@ -187,6 +216,11 @@
     modalClose.focus();
 
     document.getElementById("modalBack").addEventListener("click", closeModal);
+    document.getElementById("modalFav").addEventListener("click", function () {
+      var added = toggleFav(r.id);
+      this.textContent = added ? "♥ Favorited" : "♡ Add to favorites";
+      render();
+    });
   }
 
   function closeModal() {

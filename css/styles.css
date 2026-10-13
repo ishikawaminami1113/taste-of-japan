@@ -1,4 +1,4 @@
-/* Taste of Japan — polished, readable styles v4 */
+/* Taste of Japan — polished, readable styles v5 */
 :root{
   --ink:#1a1a18;
   --muted:#5a5a54;
@@ -61,9 +61,8 @@ button{font:inherit;cursor:pointer}
 .hero{
   padding:96px 0 72px;
   background:
-    radial-gradient(circle at 85% 15%,rgba(179,51,43,.04) 0%,transparent 50%),
-    radial-gradient(circle at 10% 90%,rgba(168,123,31,.04) 0%,transparent 40%);
-  overflow:hidden;
+    linear-gradient(rgba(251,250,247,.92),rgba(251,250,247,.96)),
+    url('https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=1400&q=80&auto=format') center/cover no-repeat;
 }
 .hero__grid{
   display:grid;
@@ -200,6 +199,10 @@ button{font:inherit;cursor:pointer}
 .resto__rating small{color:var(--muted)}
 .resto__price{font-size:.86rem;color:var(--muted);margin-top:4px}
 .resto__price b{color:var(--ink);font-weight:600}
+.resto__fav{background:none;border:none;font-size:1.3rem;cursor:pointer;padding:4px;color:var(--muted);transition:color .15s,transform .15s;align-self:center}
+.resto__fav:hover{transform:scale(1.2)}
+.resto__fav.fav{color:var(--accent)}
+.resto.fav{border-left:3px solid var(--accent)}
 
 /* ---------- food guide ---------- */
 .guide-list{list-style:none;counter-reset:guide}
@@ -255,6 +258,16 @@ button{font:inherit;cursor:pointer}
 
 /* ---------- faq ---------- */
 .faq-list{max-width:760px;border-top:1px solid var(--line-dark)}
+/* ---------- conversations ---------- */
+.conv-list{display:grid;gap:20px;max-width:760px}
+.conv-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow-sm)}
+.conv-card__line{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}
+.conv-card__line:last-child{margin-bottom:0}
+.conv-card__speaker{flex-shrink:0;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-top:2px}
+.conv-card__speaker.staff{background:#fce8e6;color:var(--accent)}
+.conv-card__speaker.you{background:#e8f0e8;color:#2e7d32}
+.conv-card__line p{font-size:.95rem;line-height:1.7}
+.conv-card__line small{color:var(--muted);font-size:.82rem}
 .faq-item{border-bottom:1px solid var(--line-dark)}
 .faq-item summary{
   list-style:none;cursor:pointer;padding:20px 4px;
@@ -333,6 +346,44 @@ button{font:inherit;cursor:pointer}
 .btn--ghost{background:var(--paper);color:var(--ink)}
 .btn--ghost:hover{background:#f0ede4;text-decoration:none}
 
+/* ---------- page transition ---------- */
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.section{animation:fadeIn .5s ease both}
+.section:nth-child(2){animation-delay:.05s}
+.section:nth-child(3){animation-delay:.1s}
+.section:nth-child(4){animation-delay:.15s}
+.section:nth-child(5){animation-delay:.2s}
+.section:nth-child(6){animation-delay:.25s}
+.section:nth-child(7){animation-delay:.3s}
+
+/* ---------- dark mode ---------- */
+@media (prefers-color-scheme: dark){
+  :root{
+    --ink:#e8e6e0;
+    --muted:#9a9890;
+    --line:#3a3830;
+    --line-dark:#4a4840;
+    --bg:#1a1a18;
+    --paper:#242420;
+    --shadow-sm:0 1px 3px rgba(0,0,0,.3);
+    --shadow-md:0 4px 12px rgba(0,0,0,.4);
+    --shadow-lg:0 8px 24px rgba(0,0,0,.5);
+  }
+  .conv-card__speaker.staff{background:#3a2020;color:#e88}
+  .conv-card__speaker.you{background:#203a20;color:#8c8}
+  .hero__lede{color:#c8c6c0}
+  .hero__circle{box-shadow:0 24px 48px rgba(0,0,0,.5),inset 0 0 0 12px rgba(40,40,36,.5)}
+  .section--tint{background:#202020}
+  .site-footer{background:#141412}
+  .nav-menu.open{background:var(--bg)}
+  .phrase-table tr{background:var(--paper);border-color:var(--line-dark)}
+  .hero{
+    background:
+      linear-gradient(rgba(26,26,24,.92),rgba(26,26,24,.96)),
+      url('https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=1400&q=80&auto=format') center/cover no-repeat;
+  }
+}
+
 /* ---------- responsive ---------- */
 @media (max-width:760px){
   html{scroll-padding-top:104px}
@@ -366,6 +417,8 @@ button{font:inherit;cursor:pointer}
   .resto__meta{font-size:.78rem}
   .resto__rating{font-size:.86rem}
   .resto__price{font-size:.8rem}
+  .resto__fav{font-size:1.1rem;padding:2px}
+  .conv-card{padding:16px 18px}
   .etiquette-cols{grid-template-columns:1fr}
   .etiquette-hd{font-size:1.05rem}
   .rule-list li{font-size:.88rem}
