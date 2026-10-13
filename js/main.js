@@ -1,4 +1,4 @@
-/* Taste of Japan — main script (v3, simple) */
+/* Taste of Japan — main script (v4, polished) */
 (function () {
   "use strict";
 
@@ -86,10 +86,7 @@
   };
 
   function priceText(r) {
-    var parts = [];
-    if (r.lunch) parts.push("L " + r.lunch);
-    if (r.dinner) parts.push("D " + r.dinner);
-    return parts.join("<br>") || esc(r.priceNote);
+    return r.priceNote || "";
   }
 
   /* ---------- list ---------- */
@@ -240,6 +237,20 @@
     var el = document.getElementById(id);
     if (el) navIO.observe(el);
   });
+
+  /* ---------- scroll reveal ---------- */
+  var revealEls = document.querySelectorAll(".resto, .guide-list li, .rule-list li, .faq-item");
+  if ("IntersectionObserver" in window) {
+    var revealIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add("revealed");
+          revealIO.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+    revealEls.forEach(function (el) { revealIO.observe(el); });
+  }
 
   /* ---------- init ---------- */
   buildCuisineSelect();
