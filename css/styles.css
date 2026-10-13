@@ -346,6 +346,12 @@ button{font:inherit;cursor:pointer}
 .btn--ghost{background:var(--paper);color:var(--ink)}
 .btn--ghost:hover{background:#f0ede4;text-decoration:none}
 
+/* ---------- back to top ---------- */
+.to-top{position:fixed;right:20px;bottom:24px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line-dark);background:var(--paper);color:var(--ink);font-size:1.25rem;line-height:1;box-shadow:var(--shadow-md);cursor:pointer;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s;z-index:60}
+.to-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+.to-top:hover{transform:translateY(-3px)}
+.to-top:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
 /* ---------- page transition ---------- */
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .section{animation:fadeIn .5s ease both}

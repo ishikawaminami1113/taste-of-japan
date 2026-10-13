@@ -181,12 +181,16 @@
     <p class="result-count" id="resultCount" aria-live="polite"></p>
     <ul class="resto-list" id="restaurantList"></ul>
 
-    <!-- ★ AdSense 広告枠（承認後に下のコードを有効化。Auto Ads なら不要）
+    <!-- ★ AdSense manual ad slot.
+         Auto Ads (enabled in the AdSense dashboard) already works through the
+         site-wide head script. Only uncomment this block if you create a manual
+         ad unit and replace data-ad-slot with its ID from AdSense.
     <div class="ad-slot">
       <ins class="adsbygoogle" style="display:block"
-           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-           data-ad-slot="YYYYYYYYYY"
-           data-ad-format="auto"></ins>
+           data-ad-client="ca-pub-6504620761675105"
+           data-ad-slot="0000000000"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
     -->
@@ -430,6 +434,8 @@
     <div id="modalContent"></div>
   </div>
 </div>
+
+<button class="to-top" id="toTop" aria-label="Back to top" title="Back to top">↑</button>
 
 <script src="js/data.js?v=6"></script>
 <script src="js/main.js?v=6"></script>

@@ -286,6 +286,18 @@
     revealEls.forEach(function (el) { revealIO.observe(el); });
   }
 
+  /* ---------- back to top ---------- */
+  var toTop = document.getElementById("toTop");
+  if (toTop) {
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 600) toTop.classList.add("show");
+      else toTop.classList.remove("show");
+    }, { passive: true });
+    toTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
   /* ---------- init ---------- */
   buildCuisineSelect();
   buildAreaSelect();
