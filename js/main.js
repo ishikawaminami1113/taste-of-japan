@@ -106,7 +106,7 @@
   function rowHTML(r) {
     var fav = isFav(r.id) ? " fav" : "";
     return (
-      '<li class="resto' + fav + '" data-id="' + r.id + '" tabindex="0" role="button" aria-label="Details for ' + esc(r.name) + '">' +
+      '<div class="resto' + fav + '" data-id="' + r.id + '" tabindex="0" role="button" aria-label="Details for ' + esc(r.name) + '">' +
         '<span class="resto__icon" style="--h:' + r.hue + '">' + r.emoji + "</span>" +
         '<div class="resto__main">' +
           '<div class="resto__name">' + esc(r.name) + '<span class="jp">' + esc(r.jp) + "</span></div>" +
@@ -115,7 +115,7 @@
         '<div class="resto__rating"><span class="star">★</span> ' + r.rating.toFixed(1) + " <small>(" + r.reviews + ")</small></div>" +
         '<div class="resto__price"><b>' + "$".repeat(r.price) + "</b><br>" + priceText(r) + "</div>" +
         '<button class="resto__fav' + fav + '" data-fav="' + r.id + '" aria-label="Toggle favorite" title="Favorite">' + (isFav(r.id) ? "♥" : "♡") + "</button>" +
-      "</li>"
+      "</div>"
     );
   }
 
@@ -128,8 +128,8 @@
 
     if (!rows.length) {
       list.innerHTML =
-        '<li style="padding:32px 6px;text-align:center;color:var(--muted)">' +
-        "No restaurants match. Try different filters.</li>";
+        '<div style="padding:32px 6px;text-align:center;color:var(--muted)">' +
+        "No restaurants match. Try different filters.</div>";
       return;
     }
     list.innerHTML = rows.map(rowHTML).join("");
@@ -153,7 +153,6 @@
         var added = toggleFav(id);
         btn.textContent = added ? "♥" : "♡";
         btn.classList.toggle("fav", added);
-        row.closest ? null : null;
         var rowEl = btn.closest(".resto");
         if (rowEl) rowEl.classList.toggle("fav", added);
       });
