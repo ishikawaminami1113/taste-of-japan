@@ -107,13 +107,17 @@
     var fav = isFav(r.id) ? " fav" : "";
     return (
       '<div class="resto' + fav + '" data-id="' + r.id + '" tabindex="0" role="button" aria-label="Details for ' + esc(r.name) + '">' +
-        '<span class="resto__icon" style="--h:' + r.hue + '">' + r.emoji + "</span>" +
-        '<div class="resto__main">' +
-          '<div class="resto__name">' + esc(r.name) + '<span class="jp">' + esc(r.jp) + "</span></div>" +
-          '<div class="resto__meta">' + esc(CATEGORIES[r.category].label) + " · " + esc(r.area) + " · " + esc(r.station) + "</div>" +
+        '<div class="resto__head">' +
+          '<span class="resto__icon" style="--h:' + r.hue + '" aria-hidden="true">' + r.emoji + "</span>" +
+          "<div>" +
+            '<div class="resto__name">' + esc(r.name) + '<span class="jp">' + esc(r.jp) + "</span></div>" +
+            '<div class="resto__meta">' + esc(CATEGORIES[r.category].label) + " · " + esc(r.area) + " · " + esc(r.station) + "</div>" +
+          "</div>" +
         "</div>" +
-        '<div class="resto__rating"><span class="star">★</span> ' + r.rating.toFixed(1) + " <small>(" + r.reviews + ")</small></div>" +
-        '<div class="resto__price"><b>' + "$".repeat(r.price) + "</b><br>" + priceText(r) + "</div>" +
+        '<div class="resto__row">' +
+          '<div class="resto__rating"><span class="star">★</span> ' + r.rating.toFixed(1) + " <small>(" + r.reviews + " reviews)</small></div>" +
+          '<div class="resto__price"><b>' + "$".repeat(r.price) + "</b>" + (priceText(r) ? " " + esc(priceText(r)) : "") + "</div>" +
+        "</div>" +
         '<button class="resto__fav' + fav + '" data-fav="' + r.id + '" aria-label="Toggle favorite" title="Favorite">' + (isFav(r.id) ? "♥" : "♡") + "</button>" +
       "</div>"
     );
@@ -174,7 +178,7 @@
 
     modalContent.innerHTML =
       '<div class="modal__head" style="--h:' + r.hue + '">' +
-        '<span class="resto__icon" style="--h:' + r.hue + '">' + r.emoji + "</span>" +
+        '<span class="resto__icon" style="--h:' + r.hue + '" aria-hidden="true">' + r.emoji + "</span>" +
         "<div>" +
           "<h3>" + esc(r.name) + '<span class="jp">' + esc(r.jp) + "</span></h3>" +
           '<div class="meta">' +
@@ -272,7 +276,7 @@
   });
 
   /* ---------- scroll reveal ---------- */
-  var revealEls = document.querySelectorAll(".resto, .guide-list li, .rule-list li, .faq-item");
+  var revealEls = document.querySelectorAll(".resto, .guide-card, .rule-list li, .conv-card, .faq-item, .photo-band, .conv-aside");
   if ("IntersectionObserver" in window) {
     var revealIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {

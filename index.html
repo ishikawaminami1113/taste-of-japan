@@ -9,15 +9,16 @@
 <meta property="og:url" content="https://ofjapantaste.com/">
 <meta property="og:title" content="Taste of Japan — Restaurant Guide for Visitors">
 <meta property="og:description" content="Discover the best Japanese restaurants in Tokyo. Real reviews, practical tips, and a mini phrasebook for international visitors.">
-<meta property="og:image" content="https://ofjapantaste.com/og-image.png">
+<meta property="og:image" content="https://ofjapantaste.com/og-image.jpg">
 <meta property="og:site_name" content="Taste of Japan">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://ofjapantaste.com/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍣</text></svg>">
+<link rel="icon" href="img/mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=7">
+<link rel="preload" as="image" href="img/hero.jpg" fetchpriority="high">
+<link rel="stylesheet" href="css/styles.css?v=8">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6504620761675105"
      crossorigin="anonymous"></script>
 <script type="application/ld+json">
@@ -97,7 +98,12 @@
 <header class="site-header">
   <div class="container header-inner">
     <a href="#home" class="brand">
-      🍣 Taste of Japan <span class="brand__sub">日本のグルメ案内</span>
+      <svg class="brand__mark" viewBox="0 0 40 40" role="img" aria-label="Taste of Japan logo" focusable="false">
+        <circle cx="20" cy="20" r="20" fill="#f4ede1"/>
+        <rect x="8" y="21" width="24" height="11" rx="3.5" fill="#ffffff" stroke="#ddd6c6" stroke-width="1"/>
+        <path d="M9.5 21.5c0-4.2 4.5-7.5 10.5-7.5s10.5 3.3 10.5 7.5z" fill="#c1372f"/>
+      </svg>
+      Taste of Japan <span class="brand__sub">日本のグルメ案内</span>
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
     <nav class="nav-menu" id="navMenu">
@@ -114,38 +120,34 @@
 
 <section class="hero" id="home">
   <div class="container">
-    <div class="hero__grid">
-      <div class="hero__copy">
-        <p class="hero__eyebrow">Tokyo dining guide · for international visitors</p>
-        <h1>Japanese restaurant guide</h1>
-        <p class="hero__lede">
-          Twenty-six real, highly-rated restaurants in Tokyo — from casual counters to kaiseki.
-          Ratings, practical notes and a mini phrasebook for eating out in Japan.
-        </p>
-        <p class="hero__links">
-          Browse:
-          <a href="#restaurants" data-cat="sushi">Sushi</a> ·
-          <a href="#restaurants" data-cat="ramen">Ramen</a> ·
-          <a href="#restaurants" data-cat="izakaya">Izakaya</a> ·
-          <a href="#restaurants" data-cat="tempura">Tempura</a> ·
-          <a href="#restaurants" data-cat="wagyu">Wagyu</a> ·
-          <a href="#restaurants" data-cat="soba">Soba</a> ·
-          <a href="#restaurants" data-cat="udon">Udon</a> ·
-          <a href="#restaurants" data-cat="okonomiyaki">Okonomiyaki</a> ·
-          <a href="#restaurants" data-cat="curry">Curry</a> ·
-          <a href="#restaurants" data-cat="kaiseki">Kaiseki</a> ·
-          <a href="#restaurants" data-cat="cafe">Café</a>
-        </p>
-      </div>
-      <div class="hero__visual">
-        <div class="hero__circle" role="img" aria-label="A platter of Japanese sushi"></div>
-        <span class="hero__float hero__float--1" aria-hidden="true">🍜</span>
-        <span class="hero__float hero__float--2" aria-hidden="true">🍤</span>
-        <span class="hero__float hero__float--3" aria-hidden="true">🍵</span>
-        <span class="hero__float hero__float--4" aria-hidden="true">🥩</span>
-        <span class="hero__float hero__float--5" aria-hidden="true">🍢</span>
-        <span class="hero__float hero__float--6" aria-hidden="true">🍁</span>
-      </div>
+    <p class="hero__eyebrow">Tokyo dining guide · for international visitors</p>
+    <h1>Japanese restaurant guide</h1>
+    <p class="hero__lede">
+      Twenty-six real, highly-rated restaurants in Tokyo — from casual counters to kaiseki.
+      Ratings, practical notes and a mini phrasebook for eating out in Japan.
+    </p>
+    <p class="hero__links">
+      <span class="hero__links-label">Browse by dish</span>
+      <a href="#restaurants" data-cat="sushi">Sushi</a>
+      <a href="#restaurants" data-cat="ramen">Ramen</a>
+      <a href="#restaurants" data-cat="izakaya">Izakaya</a>
+      <a href="#restaurants" data-cat="tempura">Tempura</a>
+      <a href="#restaurants" data-cat="wagyu">Wagyu</a>
+      <a href="#restaurants" data-cat="soba">Soba</a>
+      <a href="#restaurants" data-cat="udon">Udon</a>
+      <a href="#restaurants" data-cat="okonomiyaki">Okonomiyaki</a>
+      <a href="#restaurants" data-cat="curry">Curry</a>
+      <a href="#restaurants" data-cat="kaiseki">Kaiseki</a>
+      <a href="#restaurants" data-cat="cafe">Café</a>
+    </p>
+    <div class="hero__visual" aria-hidden="true">
+      <span class="hero__float">🍣</span>
+      <span class="hero__float">🍜</span>
+      <span class="hero__float">🍤</span>
+      <span class="hero__float">🍢</span>
+      <span class="hero__float">🍵</span>
+      <span class="hero__float">🥩</span>
+      <span class="hero__float">🍁</span>
     </div>
   </div>
 </section>
@@ -205,56 +207,56 @@
       <h2 class="section-title">Food guide</h2>
       <p class="section-lede">The basics of Japanese dining, in plain English.</p>
     </header>
-    <ol class="guide-list">
-      <li>
-        <span class="guide-list__emoji">🍣</span>
-        <div><h3>Sushi</h3>
+    <div class="guide-grid">
+      <article class="guide-card">
+        <div class="guide-card__img"><img src="img/cat-sushi.jpg" alt="Nigiri sushi on a plate" loading="lazy" decoding="async"></div>
+        <h3><span class="num">01</span> Sushi</h3>
         <p>Vinegared rice with fresh seafood, from conveyor-belt chains to ¥20,000 counters. Nigiri is the classic single piece.</p>
-        <p class="guide-list__try">Must-try: otoro (fatty tuna)</p></div>
-      </li>
-      <li>
-        <span class="guide-list__emoji">🍜</span>
-        <div><h3>Ramen</h3>
+        <p class="guide-list__try">Must-try: otoro (fatty tuna)</p>
+      </article>
+      <article class="guide-card">
+        <div class="guide-card__img"><img src="img/cat-ramen.jpg" alt="A bowl of ramen with egg and chashu" loading="lazy" decoding="async"></div>
+        <h3><span class="num">02</span> Ramen</h3>
         <p>Wheat noodles in rich regional broths — tonkotsu (pork), shoyu (soy), miso. Slurping is a compliment.</p>
-        <p class="guide-list__try">Must-try: tonkotsu with extra chashu</p></div>
-      </li>
-      <li>
-        <span class="guide-list__emoji">🍤</span>
-        <div><h3>Tempura</h3>
+        <p class="guide-list__try">Must-try: tonkotsu with extra chashu</p>
+      </article>
+      <article class="guide-card">
+        <div class="guide-card__img"><img src="img/cat-tempura.jpg" alt="Shrimp tempura in a serving basket" loading="lazy" decoding="async"></div>
+        <h3><span class="num">03</span> Tempura</h3>
         <p>Seafood and vegetables in a light batter, fried to order. Eat with tentsuyu sauce and grated daikon.</p>
-        <p class="guide-list__try">Must-try: anago (sea eel)</p></div>
-      </li>
-      <li>
-        <span class="guide-list__emoji">🍢</span>
-        <div><h3>Izakaya</h3>
+        <p class="guide-list__try">Must-try: anago (sea eel)</p>
+      </article>
+      <article class="guide-card">
+        <div class="guide-card__img"><img src="img/cat-izakaya.jpg" alt="Yakitori skewers served on plates" loading="lazy" decoding="async"></div>
+        <h3><span class="num">04</span> Izakaya</h3>
         <p>Japan's pub culture: small shared plates, yakitori skewers and drinks. Order a few things and pass them around.</p>
-        <p class="guide-list__try">Must-try: yakitori with cold sake</p></div>
-      </li>
-      <li>
-        <span class="guide-list__emoji">🍁</span>
-        <div><h3>Kaiseki</h3>
+        <p class="guide-list__try">Must-try: yakitori with cold sake</p>
+      </article>
+      <article class="guide-card">
+        <div class="guide-card__img"><img src="img/cat-kaiseki.jpg" alt="A kaiseki course served on a tray" loading="lazy" decoding="async"></div>
+        <h3><span class="num">05</span> Kaiseki</h3>
         <p>Multi-course haute cuisine that follows the seasons — tiny, beautiful dishes in a calm traditional room.</p>
-        <p class="guide-list__try">Must-try: the seasonal set menu</p></div>
-      </li>
-      <li>
-        <span class="guide-list__emoji">🥩</span>
-        <div><h3>Wagyu</h3>
+        <p class="guide-list__try">Must-try: the seasonal set menu</p>
+      </article>
+      <article class="guide-card">
+        <div class="guide-card__img"><img src="img/cat-wagyu.jpg" alt="Thinly sliced marbled wagyu beef" loading="lazy" decoding="async"></div>
+        <h3><span class="num">06</span> Wagyu</h3>
         <p>Intensely marbled Japanese beef, grilled at your table (yakiniku) or as sukiyaki. Look for A4/A5 grades.</p>
-        <p class="guide-list__try">Must-try: A5 tongue at yakiniku</p></div>
-      </li>
-      <li>
-        <span class="guide-list__emoji">🍝</span>
-        <div><h3>Soba &amp; Udon</h3>
+        <p class="guide-list__try">Must-try: A5 tongue at yakiniku</p>
+      </article>
+      <article class="guide-card">
+        <div class="guide-card__img"><img src="img/cat-soba.jpg" alt="Zaru soba, chilled buckwheat noodles" loading="lazy" decoding="async"></div>
+        <h3><span class="num">07</span> Soba &amp; Udon</h3>
         <p>Buckwheat soba (nutty, firm) and thick wheat udon (soft, comforting) — hot or cold by season.</p>
-        <p class="guide-list__try">Must-try: cold zaru soba in summer</p></div>
-      </li>
-      <li>
-        <span class="guide-list__emoji">🍵</span>
-        <div><h3>Matcha &amp; sweets</h3>
+        <p class="guide-list__try">Must-try: cold zaru soba in summer</p>
+      </article>
+      <article class="guide-card">
+        <div class="guide-card__img"><img src="img/cat-cafe.jpg" alt="Matcha cheesecake on a plate" loading="lazy" decoding="async"></div>
+        <h3><span class="num">08</span> Matcha &amp; sweets</h3>
         <p>Stone-ground green tea served traditionally or as a latte, paired with wagashi and parfaits.</p>
-        <p class="guide-list__try">Must-try: matcha parfait</p></div>
-      </li>
-    </ol>
+        <p class="guide-list__try">Must-try: matcha parfait</p>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -264,6 +266,9 @@
       <h2 class="section-title">Dining etiquette</h2>
       <p class="section-lede">A few simple rules that help you blend in.</p>
     </header>
+    <div class="photo-band">
+      <img src="img/sec-sushibar.jpg" alt="Sushi chefs working behind a counter bar" loading="lazy" decoding="async">
+    </div>
     <div class="etiquette-cols">
       <div>
         <h3 class="etiquette-hd do">✓ Do</h3>
@@ -328,7 +333,12 @@
       <h2 class="section-title">Common conversations</h2>
       <p class="section-lede">What happens when you sit down — and what to say back.</p>
     </header>
-    <div class="conv-list">
+    <div class="conv-wrap">
+      <aside class="conv-aside">
+        <img src="img/sec-lanterns.jpg" alt="Red paper lanterns hanging outside a Japanese restaurant" loading="lazy" decoding="async">
+        <p>Nearly all of this happens in the first few minutes after you sit down — so you can relax once the food arrives.</p>
+      </aside>
+      <div class="conv-list">
       <div class="conv-card">
         <div class="conv-card__line">
           <span class="conv-card__speaker staff">Staff</span>
@@ -379,6 +389,7 @@
           <p>Confirm and they'll bring the bill. Pay at the register or table.</p>
         </div>
       </div>
+      </div>
     </div>
   </div>
 </section>
@@ -422,10 +433,18 @@
 
 <footer class="site-footer">
   <div class="container">
-    <p class="footer__brand">🍣 Taste of Japan</p>
+    <p class="footer__brand">
+      <svg viewBox="0 0 40 40" role="img" aria-label="Taste of Japan logo" focusable="false">
+        <circle cx="20" cy="20" r="20" fill="#f4ede1"/>
+        <rect x="8" y="21" width="24" height="11" rx="3.5" fill="#ffffff" stroke="#ddd6c6" stroke-width="1"/>
+        <path d="M9.5 21.5c0-4.2 4.5-7.5 10.5-7.5s10.5 3.3 10.5 7.5z" fill="#c1372f"/>
+      </svg>
+      Taste of Japan
+    </p>
     <p class="footer__note">Restaurant information is compiled from public sources (TripAdvisor, japan-guide.com). Ratings and review counts reflect those sources as of October 2026 and may change. Prices, hours and other details change frequently — please verify directly with each restaurant before visiting.</p>
     <p class="footer__links"><a href="about.html">About</a> · <a href="privacy.html">Privacy Policy</a> · <a href="index.html#faq">FAQ</a></p>
     <p class="footer__copy">© 2026 Taste of Japan</p>
+    <p class="footer__credit">Photographs are illustrative of Japanese food and dining in general — they are not photographs of the restaurants listed on this site. Photography supplied by <a href="https://www.pexels.com/" rel="noopener nofollow" target="_blank">Pexels</a>.</p>
   </div>
 </footer>
 
@@ -439,7 +458,7 @@
 
 <button class="to-top" id="toTop" aria-label="Back to top" title="Back to top">↑</button>
 
-<script src="js/data.js?v=7"></script>
-<script src="js/main.js?v=7"></script>
+<script src="js/data.js?v=8"></script>
+<script src="js/main.js?v=8"></script>
 </body>
 </html>

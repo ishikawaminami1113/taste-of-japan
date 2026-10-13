@@ -9,13 +9,13 @@
 <meta property="og:url" content="https://ofjapantaste.com/privacy.html">
 <meta property="og:title" content="Privacy Policy — Taste of Japan">
 <meta property="og:description" content="Privacy Policy for Taste of Japan website.">
-<meta property="og:image" content="https://ofjapantaste.com/og-image.png">
+<meta property="og:image" content="https://ofjapantaste.com/og-image.jpg">
 <link rel="canonical" href="https://ofjapantaste.com/privacy.html">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍣</text></svg>">
+<link rel="icon" href="img/mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=7">
+<link rel="stylesheet" href="css/styles.css?v=8">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6504620761675105"
      crossorigin="anonymous"></script>
 </head>
@@ -23,7 +23,14 @@
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="index.html" class="brand">🍣 Taste of Japan <span class="brand__sub">日本のグルメ案内</span></a>
+    <a href="index.html" class="brand">
+      <svg class="brand__mark" viewBox="0 0 40 40" role="img" aria-label="Taste of Japan logo" focusable="false">
+        <circle cx="20" cy="20" r="20" fill="#f4ede1"/>
+        <rect x="8" y="21" width="24" height="11" rx="3.5" fill="#ffffff" stroke="#ddd6c6" stroke-width="1"/>
+        <path d="M9.5 21.5c0-4.2 4.5-7.5 10.5-7.5s10.5 3.3 10.5 7.5z" fill="#c1372f"/>
+      </svg>
+      Taste of Japan <span class="brand__sub">日本のグルメ案内</span>
+    </a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
     <nav class="nav-menu" id="navMenu">
       <a href="index.html#restaurants" class="nav-link">Restaurants</a>
@@ -50,6 +57,12 @@
     <h2 class="sub-title">Information we collect</h2>
     <p>This site does not collect personal information (such as your name, email address, or phone number) through forms or analytics. Server access logs are kept by the hosting provider for technical purposes only.</p>
 
+    <h2 class="sub-title">Local storage (favorites)</h2>
+    <p>The heart icon saves your favorite restaurants using your browser's local storage. This list stays on your own device — it is never sent to us or to any third party, and it is removed if you clear your browser data.</p>
+
+    <h2 class="sub-title">Photographs</h2>
+    <p>The photographs on this site show Japanese food and dining scenes in general, not the restaurants listed. They are supplied by <a href="https://www.pexels.com/" target="_blank" rel="noopener nofollow">Pexels</a> under the <a href="https://www.pexels.com/license/" target="_blank" rel="noopener nofollow">Pexels License</a>.</p>
+
     <h2 class="sub-title">Advertising</h2>
     <p>This site uses Google AdSense to display advertisements. Google uses cookies, including the DART cookie, to serve ads based on your visits to this site and other sites on the internet. Third-party ad vendors may collect non-personal data such as your IP address, browser type, and pages visited.</p>
 
@@ -70,7 +83,14 @@
 
 <footer class="site-footer">
   <div class="container">
-    <p class="footer__brand">🍣 Taste of Japan</p>
+    <p class="footer__brand">
+      <svg viewBox="0 0 40 40" role="img" aria-label="Taste of Japan logo" focusable="false">
+        <circle cx="20" cy="20" r="20" fill="#f4ede1"/>
+        <rect x="8" y="21" width="24" height="11" rx="3.5" fill="#ffffff" stroke="#ddd6c6" stroke-width="1"/>
+        <path d="M9.5 21.5c0-4.2 4.5-7.5 10.5-7.5s10.5 3.3 10.5 7.5z" fill="#c1372f"/>
+      </svg>
+      Taste of Japan
+    </p>
     <p class="footer__note">A guide to real Japanese restaurants in Tokyo for international visitors.</p>
     <p class="footer__links"><a href="about.html">About</a> · <a href="privacy.html">Privacy Policy</a> · <a href="index.html#faq">FAQ</a></p>
     <p class="footer__copy">© 2026 Taste of Japan</p>
