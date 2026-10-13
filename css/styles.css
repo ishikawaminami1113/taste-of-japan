@@ -1,4 +1,4 @@
-/* Taste of Japan — polished, readable styles v3 */
+/* Taste of Japan — polished, readable styles v4 */
 :root{
   --ink:#1a1a18;
   --muted:#5a5a54;
@@ -10,6 +10,11 @@
   --gold:#a87b1f;
   --serif:'Shippori Mincho','Hiragino Mincho ProN',Georgia,serif;
   --sans:system-ui,-apple-system,'Segoe UI','Noto Sans JP',sans-serif;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06);
+  --shadow-md:0 4px 12px rgba(0,0,0,.08);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.12);
+  --radius:12px;
+  --radius-sm:8px;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -93,8 +98,9 @@ button{font:inherit;cursor:pointer}
 .filters input,.filters select{
   font:inherit;font-size:.95rem;color:var(--ink);
   background:var(--paper);
-  border:1px solid var(--line-dark);border-radius:6px;
+  border:1px solid var(--line-dark);border-radius:var(--radius-sm);
   padding:11px 16px;outline:none;
+  box-shadow:var(--shadow-sm);
 }
 .filters input{flex:1 1 240px}
 .filters input:focus,.filters select:focus{border-color:var(--ink)}
@@ -110,33 +116,38 @@ button{font:inherit;cursor:pointer}
 /* ---------- restaurant list ---------- */
 .resto-list{
   list-style:none;
-  border-top:1px solid var(--line-dark);
-  border-bottom:1px solid var(--line-dark);
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px;
 }
 .resto{
-  display:flex;align-items:center;gap:20px;
-  padding:20px 10px;
-  border-bottom:1px solid var(--line);
+  display:flex;flex-direction:column;gap:12px;
+  padding:20px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
   cursor:pointer;
-  transition:background .2s ease;
+  transition:transform .2s ease,box-shadow .2s ease;
+  box-shadow:var(--shadow-sm);
 }
-.resto:last-child{border-bottom:0}
-.resto:hover{background:#f4f1e8}
+.resto:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-md);
+}
 .resto:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
 .resto__icon{
-  flex:none;width:52px;height:52px;border-radius:10px;
+  width:52px;height:52px;border-radius:10px;
   display:flex;align-items:center;justify-content:center;font-size:28px;
   background:hsl(var(--h) 45% 90%);
   border:1px solid hsl(var(--h) 35% 78%);
 }
-.resto__main{flex:1 1 auto;min-width:0}
 .resto__name{font-weight:600;font-size:1.08rem}
 .resto__name .jp{font-weight:400;font-size:.82em;color:var(--muted);margin-left:8px}
 .resto__meta{font-size:.86rem;color:var(--muted);margin-top:3px}
-.resto__rating{flex:none;text-align:right;font-size:.98rem}
+.resto__rating{font-size:.98rem;margin-top:auto}
 .resto__rating .star{color:var(--gold)}
 .resto__rating small{color:var(--muted)}
-.resto__price{flex:none;text-align:right;font-size:.86rem;color:var(--muted);min-width:96px}
+.resto__price{font-size:.86rem;color:var(--muted);margin-top:4px}
 .resto__price b{color:var(--ink);font-weight:600}
 
 /* ---------- food guide ---------- */
@@ -177,6 +188,8 @@ button{font:inherit;cursor:pointer}
 .phrase-table{
   width:100%;border-collapse:collapse;background:var(--paper);
   border:1px solid var(--line-dark);font-size:.96rem;
+  border-radius:var(--radius);
+  overflow:hidden;
 }
 .phrase-table th{
   text-align:left;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;
@@ -210,7 +223,7 @@ button{font:inherit;cursor:pointer}
 .footer__links a{margin:0 8px}
 
 /* ---------- ad slot ---------- */
-.ad-slot{margin:32px 0;min-height:110px;border:1px dashed var(--line-dark);background:#f4f1e8}
+.ad-slot{margin:32px 0;min-height:110px;border:1px dashed var(--line-dark);background:#f4f1e8;border-radius:var(--radius)}
 
 /* ---------- sub pages ---------- */
 .sub-title{font-family:var(--serif);font-size:1.15rem;font-weight:700;margin:28px 0 10px}
@@ -226,6 +239,8 @@ button{font:inherit;cursor:pointer}
 .modal__panel{
   position:relative;background:var(--paper);max-width:620px;width:100%;
   max-height:88vh;overflow-y:auto;border:1px solid var(--line-dark);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-lg);
 }
 .modal__close{
   position:absolute;top:12px;right:12px;z-index:2;
@@ -286,12 +301,13 @@ button{font:inherit;cursor:pointer}
   .section{padding:64px 0}
   .section-head{margin-bottom:28px}
   .section-title{font-size:1.5rem}
-  .resto{flex-wrap:wrap;gap:12px;padding:16px 6px}
+  .resto-list{grid-template-columns:1fr}
+  .resto{flex-direction:row;align-items:center;gap:14px;padding:16px}
   .resto__icon{width:44px;height:44px;font-size:22px}
   .resto__name{font-size:.98rem}
   .resto__meta{font-size:.78rem}
-  .resto__rating{flex:1;text-align:left;font-size:.86rem}
-  .resto__price{order:5;min-width:0;text-align:left;margin-left:56px;font-size:.8rem}
+  .resto__rating{font-size:.86rem}
+  .resto__price{font-size:.8rem}
   .etiquette-cols{grid-template-columns:1fr}
   .etiquette-hd{font-size:1.05rem}
   .rule-list li{font-size:.88rem}
