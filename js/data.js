@@ -1,6 +1,7 @@
 /* ============================================================
    Real restaurant data — popular Tokyo spots for visitors
    Sources: TripAdvisor, japan-guide.com (public listings)
+   Ratings/review counts: as of October 2026
    NOTE: Only verifiable facts included. Prices/hours removed
    as they change frequently — check official sources.
    ============================================================ */
