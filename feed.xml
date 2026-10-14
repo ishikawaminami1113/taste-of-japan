@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Taste of Japan — Tokyo Restaurant Guide</title>
+    <link>https://ofjapantaste.com/</link>
+    <description>A guide to real Japanese restaurants in Tokyo for international visitors, with practical tips, a mini phrasebook, and neighborhood guides.</description>
+    <language>en</language>
+    <copyright>© 2026 Taste of Japan</copyright>
+    <lastBuildDate>Wed, 14 Oct 2026 09:00:00 +0000</lastBuildDate>
+    <atom:link href="https://ofjapantaste.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>https://ofjapantaste.com/og-image.jpg</url>
+      <title>Taste of Japan — Tokyo Restaurant Guide</title>
+      <link>https://ofjapantaste.com/</link>
+    </image>
+    <item>
+      <title>Where to Eat in Tokyo: 18 Neighborhoods</title>
+      <link>https://ofjapantaste.com/tokyo-areas.html</link>
+      <guid isPermaLink="true">https://ofjapantaste.com/tokyo-areas.html</guid>
+      <pubDate>Wed, 14 Oct 2026 09:00:00 +0000</pubDate>
+      <description>Tokyo doesn't have one dining scene — it has one per neighborhood. A guide to the 18 areas in our directory, from Ginza's polished counters to Toyosu's market sushi, with each area linked to its pre-filtered listings.</description>
+      <category>Guides</category>
+    </item>
+    <item>
+      <title>Eating Out in Japan: A First-Timer's Guide</title>
+      <link>https://ofjapantaste.com/eat-in-japan.html</link>
+      <guid isPermaLink="true">https://ofjapantaste.com/eat-in-japan.html</guid>
+      <pubDate>Wed, 14 Oct 2026 09:00:00 +0000</pubDate>
+      <description>How to choose a restaurant, order without Japanese, mind your manners, and pay. Everything you need to dine out in Japan with confidence, even without a word of Japanese.</description>
+      <category>Guides</category>
+    </item>
+    <item>
+      <title>Eating Well in Tokyo on a Budget</title>
+      <link>https://ofjapantaste.com/budget.html</link>
+      <guid isPermaLink="true">https://ofjapantaste.com/budget.html</guid>
+      <pubDate>Wed, 14 Oct 2026 09:00:00 +0000</pubDate>
+      <description>What each price level actually gets you in Tokyo — from under-¥1,000 ramen and curry to high-end sushi and wagyu — with real restaurants from our directory at every tier.</description>
+      <category>Guides</category>
+    </item>
+    <item>
+      <title>What to Eat in Japan by Season</title>
+      <link>https://ofjapantaste.com/seasonal.html</link>
+      <guid isPermaLink="true">https://ofjapantaste.com/seasonal.html</guid>
+      <pubDate>Wed, 14 Oct 2026 09:00:00 +0000</pubDate>
+      <description>Japanese cuisine follows the seasons closely. A month-by-month guide: spring bamboo shoots and sakura mochi, summer unagi and cold noodles, autumn sanma and matsutake, winter oden and fugu.</description>
+      <category>Guides</category>
+    </item>
+    <item>
+      <title>Vegetarian &amp; Vegan Dining in Tokyo</title>
+      <link>https://ofjapantaste.com/vegetarian.html</link>
+      <guid isPermaLink="true">https://ofjapantaste.com/vegetarian.html</guid>
+      <pubDate>Wed, 14 Oct 2026 09:00:00 +0000</pubDate>
+      <description>The dashi issue explained, how to communicate your needs in Japanese, and which restaurants in our directory can accommodate plant-based diets.</description>
+      <category>Guides</category>
+    </item>
+  </channel>
+</rss>
