@@ -307,6 +307,26 @@ img{max-width:100%}
 .faq-item[open] summary::after{content:"–"}
 .faq-item p{padding:0 4px 22px;color:#3d3d3a;font-size:.96rem;line-height:1.85}
 
+/* ---------- article pages ---------- */
+.article-hero{
+  background:linear-gradient(180deg,#f2efe6 0%,var(--bg) 100%);
+  padding:72px 0 56px;border-bottom:1px solid var(--line);
+}
+.article-hero__eyebrow{font-size:.76rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.article-hero h1{font-family:var(--serif);font-size:clamp(1.9rem,4.2vw,2.9rem);font-weight:700;line-height:1.25;margin-bottom:16px}
+.article-hero__lede{max-width:58ch;color:var(--muted);font-size:1.06rem;line-height:1.8}
+.article-body{max-width:780px}
+.article-body>p{font-size:1.02rem;color:#3d3d3a;line-height:1.9;margin-bottom:22px}
+.article-body h2{font-family:var(--serif);font-size:1.5rem;margin:42px 0 14px}
+.article-body .plain-list{margin:0 0 22px}
+.area-block{border-top:1px solid var(--line);padding:22px 0}
+.area-block:first-of-type{border-top:0;padding-top:4px}
+.area-block h2{display:flex;align-items:baseline;gap:12px;margin:0 0 10px;font-size:1.32rem}
+.area-block h2 .count{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--accent);background:#f6efe9;border:1px solid #ecd9c9;padding:2px 10px;border-radius:999px;white-space:nowrap}
+.area-block p{font-size:.97rem;color:#3d3d3a;line-height:1.85;margin-bottom:12px}
+.area-link{font-size:.92rem;font-weight:600}
+.fine-print{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:18px;margin-top:36px}
+
 /* ---------- footer ---------- */
 .site-footer{
   background:var(--night);color:#b9b4a8;
@@ -426,6 +446,9 @@ img{max-width:100%}
   .resto__fav:hover{background:#2e2c28}
   .conv-aside p{background:var(--paper)}
   .conv-aside{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .article-hero{background:linear-gradient(180deg,#202020 0%,var(--bg) 100%)}
+  .article-body>p,.area-block p{color:#c8c6c0}
+  .area-block h2 .count{background:#2e2c28;border-color:var(--line-dark)}
 }
 
 /* ---------- responsive ---------- */
@@ -492,6 +515,15 @@ img{max-width:100%}
   .modal__head .meta{font-size:.78rem}
   .sub-title{font-size:1.05rem;margin:22px 0 8px}
   .plain-list{font-size:.88rem}
+  .article-hero{padding:56px 0 44px}
+  .article-hero h1{font-size:1.7rem}
+  .article-hero__lede{font-size:.98rem}
+  .article-body>p{font-size:.95rem}
+  .article-body h2{font-size:1.3rem;margin:34px 0 12px}
+  .area-block h2{font-size:1.15rem;flex-wrap:wrap}
+  .area-block h2 .count{font-size:.68rem}
+  .area-block p{font-size:.88rem}
+  .fine-print{font-size:.8rem}
   .site-footer{padding:40px 0 30px}
   .footer__brand{font-size:1.05rem}
   .footer__note{font-size:.8rem}

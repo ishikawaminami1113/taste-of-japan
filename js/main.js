@@ -61,15 +61,18 @@
       areas.map(function (a) { return '<option value="' + esc(a) + '">' + esc(a) + "</option>"; }).join("");
   }
 
-  [cuisineSelect, areaSelect, budgetSelect, sortSelect].forEach(function (sel) {
-    sel.addEventListener("change", function () {
-      state.category = cuisineSelect.value;
-      state.area = areaSelect.value;
-      state.budget = budgetSelect.value;
-      state.sort = sortSelect.value;
-      render();
+  /* ---------- filter controls (restaurant page only) ---------- */
+  if (cuisineSelect && areaSelect && budgetSelect && sortSelect) {
+    [cuisineSelect, areaSelect, budgetSelect, sortSelect].forEach(function (sel) {
+      sel.addEventListener("change", function () {
+        state.category = cuisineSelect.value;
+        state.area = areaSelect.value;
+        state.budget = budgetSelect.value;
+        state.sort = sortSelect.value;
+        render();
+      });
     });
-  });
+  }
 
   /* ---------- hero quick links ---------- */
   document.querySelectorAll("[data-cat]").forEach(function (a) {
@@ -124,6 +127,7 @@
   }
 
   function render() {
+    if (!list || !resultCount) return;
     var rows = RESTAURANTS.filter(matches).sort(SORTS[state.sort] || SORTS.popular);
     resultCount.textContent =
       rows.length === RESTAURANTS.length
@@ -232,23 +236,29 @@
     document.body.style.overflow = "";
   }
 
-  modalClose.addEventListener("click", closeModal);
-  modalOverlay.addEventListener("click", closeModal);
+  if (modal && modalClose && modalOverlay) {
+    modalClose.addEventListener("click", closeModal);
+    modalOverlay.addEventListener("click", closeModal);
+  }
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
+    if (e.key === "Escape" && modal && modal.classList.contains("open")) closeModal();
   });
 
   /* ---------- search ---------- */
-  searchInput.addEventListener("input", function () {
-    state.query = searchInput.value.trim().toLowerCase();
-    render();
-  });
+  if (searchInput) {
+    searchInput.addEventListener("input", function () {
+      state.query = searchInput.value.trim().toLowerCase();
+      render();
+    });
+  }
 
   /* ---------- featured link ---------- */
-  featuredLink.addEventListener("click", function () {
-    var r = RESTAURANTS.find(function (x) { return x.featured; }) || RESTAURANTS[0];
-    openModal(r.id);
-  });
+  if (featuredLink) {
+    featuredLink.addEventListener("click", function () {
+      var r = RESTAURANTS.find(function (x) { return x.featured; }) || RESTAURANTS[0];
+      openModal(r.id);
+    });
+  }
 
   /* ---------- mobile nav ---------- */
   navToggle.addEventListener("click", function () {
@@ -302,7 +312,32 @@
   }
 
   /* ---------- init ---------- */
-  buildCuisineSelect();
-  buildAreaSelect();
-  render();
+  if (list && resultCount) {
+    buildCuisineSelect();
+    buildAreaSelect();
+
+    /* ---------- deep links from article pages (?cat= / ?area=) ---------- */
+    (function applyQueryParams() {
+      var q;
+      try { q = new URLSearchParams(window.location.search); } catch (e) { return; }
+      var cat = q.get("cat");
+      var area = q.get("area");
+      if (cat && CATEGORIES[cat]) {
+        state.category = cat;
+        cuisineSelect.value = cat;
+      }
+      if (area) {
+        var found = false;
+        Array.prototype.forEach.call(areaSelect.options, function (o) {
+          if (o.value === area) found = true;
+        });
+        if (found) {
+          state.area = area;
+          areaSelect.value = area;
+        }
+      }
+    })();
+
+    render();
+  }
 })();
