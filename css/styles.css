@@ -30,6 +30,7 @@ body{
 }
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
+main p a, main li a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 .container{width:min(1040px,92%);margin-inline:auto}
 button{font:inherit;cursor:pointer}
 img{max-width:100%}
@@ -229,7 +230,7 @@ img{max-width:100%}
 .guide-card__img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
 .guide-card:hover .guide-card__img img{transform:scale(1.05)}
 .guide-card h3{font-family:var(--serif);font-size:1.12rem;margin-bottom:6px;display:flex;align-items:baseline;gap:8px}
-.guide-card h3 .num{font-size:.78em;color:var(--line-dark);font-weight:700}
+.guide-card h3 .num{font-size:.78em;color:var(--muted);font-weight:700}
 .guide-card p{font-size:.92rem;color:#3d3d3a;line-height:1.75}
 .guide-list__try{font-size:.86rem;color:var(--accent);font-weight:600;margin-top:8px}
 
@@ -292,7 +293,7 @@ img{max-width:100%}
 .conv-card__line:last-child{margin-bottom:0}
 .conv-card__speaker{flex-shrink:0;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-top:2px}
 .conv-card__speaker.staff{background:#fce8e6;color:var(--accent)}
-.conv-card__speaker.you{background:#e8f0e8;color:#2e7d32}
+.conv-card__speaker.you{background:#e8f0e8;color:#1b5e20}
 .conv-card__line p{font-size:.95rem;line-height:1.7}
 .conv-card__line small{color:var(--muted);font-size:.82rem}
 .faq-item{border-bottom:1px solid var(--line-dark)}
@@ -311,18 +312,18 @@ img{max-width:100%}
   background:var(--night);color:#b9b4a8;
   padding:56px 0 40px;border-top:3px solid var(--accent);
 }
-.site-footer a{color:#e7c98a}
+.site-footer a{color:#e7c98a;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 .site-footer a:hover{color:#fff}
 .footer__brand{
   font-family:var(--serif);font-weight:700;font-size:1.15rem;color:#fff;
   margin-bottom:12px;display:flex;align-items:center;gap:10px;
 }
 .footer__brand svg{width:26px;height:26px}
-.footer__note{font-size:.85rem;max-width:74ch;line-height:1.8}
+.footer__note{font-size:.85rem;max-width:74ch;line-height:1.8;color:#c5c0b4}
 .footer__links{font-size:.88rem;margin-top:18px}
 .footer__links a{margin:0 8px}
-.footer__copy{font-size:.8rem;color:#7d786d;margin-top:22px}
-.footer__credit{font-size:.74rem;color:#7d786d;margin-top:10px;max-width:74ch;line-height:1.7}
+.footer__copy{font-size:.8rem;color:#a8a294;margin-top:22px}
+.footer__credit{font-size:.76rem;color:#a8a294;margin-top:10px;max-width:74ch;line-height:1.75}
 
 /* ---------- ad slot ---------- */
 .ad-slot{margin:32px 0;min-height:110px;border:1px dashed var(--line-dark);background:#f4f1e8;border-radius:var(--radius)}
@@ -425,7 +426,6 @@ img{max-width:100%}
   .resto__fav:hover{background:#2e2c28}
   .conv-aside p{background:var(--paper)}
   .conv-aside{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-  .guide-card h3 .num{color:#5a5850}
 }
 
 /* ---------- responsive ---------- */

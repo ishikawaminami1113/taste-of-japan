@@ -106,7 +106,7 @@
   function rowHTML(r) {
     var fav = isFav(r.id) ? " fav" : "";
     return (
-      '<div class="resto' + fav + '" data-id="' + r.id + '" tabindex="0" role="button" aria-label="Details for ' + esc(r.name) + '">' +
+      '<div class="resto' + fav + '" data-id="' + r.id + '" tabindex="0" role="button">' +
         '<div class="resto__head">' +
           '<span class="resto__icon" style="--h:' + r.hue + '" aria-hidden="true">' + r.emoji + "</span>" +
           "<div>" +
