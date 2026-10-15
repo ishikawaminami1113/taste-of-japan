@@ -135,4 +135,5 @@ The user does this in the browser; the agent cannot (it needs their Google login
 The scripting itself needs no installs: `ga4-report.ps1` signs the JWT with the OpenSSL
 that ships with Git for Windows.
 
-`/site-status` runs this playbook as a slash command.
+`/site` runs this playbook as a slash command. Typing the sentence above also works —
+`AGENTS.md` is loaded automatically every session.
