@@ -1,0 +1,22 @@
+# ---------------------------------------------------------------------------
+# Never commit credentials. This repo is published as a public website, so
+# anything tracked here becomes world-readable.
+# ---------------------------------------------------------------------------
+
+# GA4 Data API service-account key + config (private key lives here)
+tools/.ga4/
+
+# Common secret file patterns, as a safety net
+*.pem
+*.p12
+*.pfx
+service-account*.json
+*-credentials.json
+.env
+.env.*
+
+# Editor / OS noise
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
