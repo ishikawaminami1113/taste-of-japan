@@ -28,6 +28,8 @@ An English-language guide to Japanese restaurants for international visitors.
 - `serve.ps1` — local preview server (port 8000)
 - `tools/site-check.ps1` — one-shot health & visibility report
 - `tools/ga4-report.ps1` — GA4 traffic report (service account; see below)
+- `tools/ga4-auto-setup.ps1` — automates the GA4 setup; see "GA4 Data API setup"
+- `tools/ga4-setup.ps1` — simpler guided alternative (no automation)
 - `tools/.ga4/` — **gitignored**: `key.json` (service-account key) + `property.txt`
 - `PROJECT_BACKUP.md` — full project documentation
 
@@ -79,9 +81,10 @@ When the user sends this sentence (or anything close), run this checklist withou
 asking for permission first, then report in Japanese.
 
 1. **Gather** — run `tools/site-check.ps1` and read the output.
-2. **Popularity** — run `tools/ga4-report.ps1` (real GA4 traffic, once set up — see
-   "GA4 Data API setup"). If it is not configured yet, fall back to the visibility signal
-   from `site-check.ps1` and say plainly which numbers still need a login.
+2. **Popularity** — run `tools/ga4-report.ps1 -Days 28` for real GA4 traffic. If no key is
+   configured, offer to run `tools/ga4-auto-setup.ps1`, which does the whole setup once
+   the user has signed into Google in their own Chrome. Otherwise fall back to the
+   visibility signal from `site-check.ps1` and say plainly what still needs a login.
 3. **Decide & act** — pick the highest-value fix you can fully verify, for example:
    - verify a few restaurant facts (prices, hours, ratings, awards) against public sources
      and correct `js/data.js`
@@ -109,31 +112,51 @@ Real traffic/revenue numbers need a login, which the agent's browser does **not*
 If a needed number cannot be read automatically, ask the user to paste a screenshot.
 
 ## GA4 Data API setup (one time, ~10 minutes)
-The user does this in the browser; the agent cannot (it needs their Google login).
+The agent cannot create Google credentials itself: it has no Google login, there is
+no `gcloud` CLI on this machine, and no credentials on disk. But the agent's browser
+runs the user's real Chrome profile, so **one sign-in unlocks the whole thing**.
 
-1. Go to <https://console.cloud.google.com/> and create (or pick) a project.
-2. **APIs & Services → Library** → search **"Google Analytics Data API"** → **Enable**.
-3. **IAM & Admin → Service Accounts → Create service account**
-   - Name it e.g. `ga4-reader`, click **Create and continue**, then **Done**.
-   - (No project-level role is needed.)
-4. Open the new service account → **Keys** tab → **Add key → Create new key → JSON**.
-   The JSON file downloads.
-5. Move that file to `tools/.ga4/key.json` (create the folder). It is gitignored —
-   **never commit it**.
-6. Copy the service-account email (`...@....iam.gserviceaccount.com`).
-7. In GA4: **Admin → (Property) → Property access management → Add users** →
-   paste that email, role **Viewer** (uncheck "Notify by email") → **Add**.
-8. In GA4: **Admin → Property settings** → copy the numeric **Property ID**.
-   Put it in `tools/.ga4/property.txt` (just the number, e.g. `123456789`).
-9. Test:
-   ```powershell
-   powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\ga4-report.ps1
-   ```
-   A traffic report means it works. `invalid_grant: account not found` means step 5 or 7
-   was missed; `PERMISSION_DENIED` means step 7 was missed.
+### Automated (recommended) — `tools/ga4-auto-setup.ps1`
+The user only has to sign in to Google once in their own Chrome, then run one command.
+The script:
+1. copies the Chrome profile (never writes to the live one) and starts Chrome on the
+   copy with the DevTools Protocol open — that is how it inherits the Google session
+2. gates on the session and says plainly if it is missing
+3. drives **Google Cloud Shell with gcloud** rather than clicking through the Cloud
+   Console, which is far more reliable:
+   - `gcloud services enable analyticsdata.googleapis.com`
+   - `gcloud iam service-accounts create ga4-reader`
+   - `gcloud iam service-accounts keys create ... --key-file-type=json`
+   - reads the key straight out of the terminal, so nothing is downloaded and the
+     private key is never printed or pasted
+4. writes the key to `tools/.ga4/key.json` and saves the property id
+5. runs `ga4-report.ps1` to verify
 
-The scripting itself needs no installs: `ga4-report.ps1` signs the JWT with the OpenSSL
-that ships with Git for Windows.
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\ga4-auto-setup.ps1
+```
+If it reports the session is missing, the user signs in at
+<https://myaccount.google.com/> in their own Chrome and runs it again.
+Add `-ProjectId <id>` if the project cannot be worked out automatically.
+
+### Manual (fallback) — `tools/ga4-setup.ps1`
+Opens each Google page in turn and auto-installs the downloaded key. Use if the
+automated route fails on the Cloud Shell step.
+
+### Steps that stay manual either way
+Granting the service account GA4 property access and reading the numeric property id
+are the only parts the script prompts for, because GA4 property access is not
+reachable through `gcloud`.
+
+Testing:
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\ga4-report.ps1
+```
+A traffic report means it works. `invalid_grant: account not found` means the GA4 grant
+step was skipped; `PERMISSION_DENIED` means the service account is not a Viewer.
+
+The scripting needs no installs: `ga4-report.ps1` signs the JWT with the OpenSSL that
+ships with Git for Windows.
 
 `/site` runs this playbook as a slash command. Typing the sentence above also works —
 `AGENTS.md` is loaded automatically every session.
