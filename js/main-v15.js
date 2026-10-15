@@ -95,14 +95,33 @@
   }
 
   var SORTS = {
-    popular: function (a, b) { return b.reviews - a.reviews; },
-    rating: function (a, b) { return b.rating - a.rating; },
+    // Unrated entries sort last rather than becoming NaN comparisons.
+    popular: function (a, b) {
+      var x = (a.reviews === null || a.reviews === undefined) ? -1 : a.reviews;
+      var y = (b.reviews === null || b.reviews === undefined) ? -1 : b.reviews;
+      return y - x;
+    },
+    rating: function (a, b) {
+      var x = (a.rating === null || a.rating === undefined) ? -1 : a.rating;
+      var y = (b.rating === null || b.rating === undefined) ? -1 : b.rating;
+      return y - x;
+    },
     priceAsc: function (a, b) { return a.price - b.price; },
     priceDesc: function (a, b) { return b.price - a.price; },
   };
 
   function priceText(r) {
     return r.priceNote || "";
+  }
+
+  /* Rating may be null when no reliable public rating could be verified.
+     Show that plainly instead of an invented number. */
+  function ratingHTML(r) {
+    if (r.rating === null || r.rating === undefined || r.reviews === null || r.reviews === undefined) {
+      return '<span class="resto__norating">Not rated yet</span>';
+    }
+    return '<span class="star">★</span> ' + Number(r.rating).toFixed(1) +
+           " <small>(" + r.reviews + " reviews)</small>";
   }
 
   /* ---------- list ---------- */
@@ -118,7 +137,7 @@
           "</div>" +
         "</div>" +
         '<div class="resto__row">' +
-          '<div class="resto__rating"><span class="star">★</span> ' + r.rating.toFixed(1) + " <small>(" + r.reviews + " reviews)</small></div>" +
+          '<div class="resto__rating">' + ratingHTML(r) + "</div>" +
           '<div class="resto__price"><b>' + "$".repeat(r.price) + "</b>" + (priceText(r) ? " " + esc(priceText(r)) : "") + "</div>" +
         "</div>" +
         '<button class="resto__fav' + fav + '" data-fav="' + r.id + '" aria-label="Toggle favorite" title="Favorite">' + (isFav(r.id) ? "♥" : "♡") + "</button>" +
@@ -188,7 +207,7 @@
           "<h3>" + esc(r.name) + '<span class="jp">' + esc(r.jp) + "</span></h3>" +
           '<div class="meta">' +
             esc(CATEGORIES[r.category].label) + " · " + esc(r.area) + " · " +
-            '<span class="star">★</span> ' + r.rating.toFixed(1) + " (" + r.reviews + " reviews)" +
+            ratingHTML(r) +
           "</div>" +
         "</div>" +
       "</div>" +

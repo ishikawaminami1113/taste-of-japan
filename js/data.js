@@ -1,9 +1,16 @@
 /* ============================================================
    Real restaurant data — popular Tokyo spots for visitors
-   Sources: TripAdvisor, japan-guide.com (public listings)
-   Ratings/review counts: as of October 2026
-   NOTE: Only verifiable facts included. Prices/hours removed
-   as they change frequently — check official sources.
+   Sources: TripAdvisor, japan-guide.com, Tabelog, Ikyu, TableCheck
+   and each restaurant's own site/Instagram (all public listings).
+
+   Policy — accuracy over decoration:
+   * Ratings and review counts are quoted from a named source, because
+     they change constantly. Where no reliable public rating could be
+     found, rating/reviews are null and the UI says "Not rated yet"
+     rather than showing an invented number.
+   * Prices and hours change frequently. Always check the official
+     source before visiting. Do not state anything that cannot be
+     traced to a public listing.
    ============================================================ */
 
 const CATEGORIES = {
@@ -75,27 +82,30 @@ const RESTAURANTS = [
   {
     id: 3,
     name: "Sushi Inase",
-    jp: "寿司 稲瀬",
+    jp: "すし いなせ",
     category: "sushi",
     area: "Shibuya",
     price: 2,
-    rating: 5.0,
-    reviews: 203,
+    // No reliable public rating found (Ikyu reports the shop is below its
+    // minimum review threshold), so rating/reviews stay null.
+    rating: null,
+    reviews: null,
     emoji: "🍣",
     hue: 190,
-    tagline: "Chef Toshiki's nigiri in Shibuya.",
+    tagline: "Value-priced Edomae sushi counter in Shibuya.",
     description:
-      "A compact sushi counter in Shibuya run by Chef Toshiki. The nigiri is the star — each piece is carefully seasoned and served at the perfect temperature. A great spot for quality sushi without the formality of a high-end counter.",
-    dishes: ["Nigiri course", "Seasonal omakase", "Toro nigiri"],
-    tags: ["Counter seats", "Walk-in friendly"],
-    address: "Shibuya, Shibuya-ku, Tokyo",
-    station: "Shibuya Sta. area",
-    seats: "Counter seating",
-    reservation: "Walk-in",
-    hours: "Dinner service (hours vary)",
+      "A 10-seat sushi counter in Shibuya, about six minutes' walk from the Shinsouth Exit of Shibuya Station. The chef shops at the Toyosu market and builds an omakase course around seasonal fish; some courses finish with ramen and dessert. Sommelier-selected wines and seasonal sake are offered. Cards are accepted (no QR settlement), and there is no service charge or cover charge. Reservations are required and guests are seated at a fixed start time.",
+    dishes: ["Omakase course", "Sushi & side-dish course", "Seasonal nigiri"],
+    tags: ["Counter seats", "Reservation required"],
+    address: "Shibuya 3-15-5, Grime Building B1F",
+    station: "Shibuya Sta. (Shinsouth Exit), ~6 min walk",
+    seats: "10 counter seats",
+    reservation: "Reservation required",
+    hours: "17:30–23:00; also 12:00–14:00 on Sun & holidays. No regular holidays",
     lunch: null,
     dinner: null,
-    priceNote: "Mid-range (¥8,000+)",
+    priceNote: "Mid-range (lunch omakase about ¥8,800; dinner courses ¥10,000–19,000)",
+    source: "Verified against Ikyu, TableCheck, OZmall, Tabelog and the restaurant's Instagram.",
   },
   {
     id: 4,
@@ -104,48 +114,52 @@ const RESTAURANTS = [
     category: "sushi",
     area: "Ebisu",
     price: 3,
-    rating: 5.0,
-    reviews: 168,
+    // Tabelog: overall 3.54 from 395 reviews (checked 2026-10-15)
+    rating: 3.54,
+    reviews: 395,
     emoji: "🍣",
     hue: 210,
-    tagline: "Creative sushi in Ebisu.",
+    tagline: "High-value sushi in Ebisu, from a Michelin two-star chef.",
     description:
-      "A creative sushi restaurant in Ebisu, known for its innovative approach to traditional nigiri. The omakase course is highly praised, and the atmosphere is relaxed and welcoming.",
-    dishes: ["Creative omakase", "Seasonal nigiri", "Signature rolls"],
-    tags: ["Reservation recommended", "Table seats"],
+      "A small sushi counter in Ebisu run by a chef who trained at a Michelin two-star restaurant. It is known for value: a long omakase course at a comparatively low price, which is why it is often described as a hidden spot. The chef holds sommelier and sake qualifications, and pairs the nigiri with selected wines and seasonal sake. Dinner only.",
+    dishes: ["Omakase course", "Seasonal nigiri"],
+    tags: ["Reservation recommended", "Counter seats"],
     address: "Ebisu, Shibuya-ku, Tokyo",
     station: "Ebisu Sta. area",
-    seats: "Counter and table seating",
+    seats: "Counter seating (about 8 seats)",
     reservation: "Reservation recommended",
-    hours: "Dinner service (hours vary)",
+    hours: "Dinner only (hours vary)",
     lunch: null,
     dinner: null,
-    priceNote: "High-end (¥10,000+)",
+    priceNote: "High-end (¥10,000+; dinner courses around ¥17,490)",
+    source: "Verified against Tabelog, japan-food.guide and the restaurant's Instagram.",
   },
   {
     id: 5,
     name: "Ginza Yakiniku Salon de Aging Beef",
-    jp: "銀座 焼肉サロン・ド・エイジングビーフ",
+    jp: "銀座焼肉サロン ド エイジングビーフ",
     category: "wagyu",
     area: "Ginza",
     price: 3,
-    rating: 5.0,
-    reviews: 108,
+    // Ikyu: 4.57 from 22 reviews (checked 2026-10-15)
+    rating: 4.57,
+    reviews: 22,
     emoji: "🥩",
     hue: 0,
-    tagline: "Aging beef yakiniku in Ginza.",
+    tagline: "Three-week-aged Yonezawa beef yakiniku in Ginza.",
     description:
-      "A yakiniku restaurant in Ginza specializing in aged beef. The meat is carefully aged to enhance its flavor and tenderness, then grilled at your table. The salon-style interior is elegant yet relaxed.",
-    dishes: ["Aging beef course", "Wagyu tongue", "Kalbi (short rib)"],
+      "A yakiniku restaurant in Ginza specialising in Yonezawa beef aged for three weeks. The meat is cooked at your table in an elegant, relaxed salon-style room. It was named to Tabelog's Tokyo Yakiniku Hyakumeiten in 2024, and relocated and reopened in May 2025.",
+    dishes: ["Aged beef course", "Wagyu tongue", "Kalbi (short rib)"],
     tags: ["Table seats", "Reservation recommended"],
     address: "Ginza, Chuo-ku, Tokyo",
     station: "Ginza Sta. area",
     seats: "Table seating",
     reservation: "Reservation recommended",
-    hours: "Dinner service (hours vary)",
+    hours: "Dinner service (hours vary); also lunch on weekends and holidays",
     lunch: null,
     dinner: null,
-    priceNote: "High-end (¥8,000+)",
+    priceNote: "High-end (¥10,000+)",
+    source: "Verified against Ikyu, Tabelog and the restaurant's Instagram.",
   },
   {
     id: 6,

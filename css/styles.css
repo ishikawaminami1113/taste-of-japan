@@ -452,6 +452,11 @@ img{max-width:100%}
 .section--tint + .section--tint{border-top:0}
 
 /* ---------- restaurant card polish ---------- */
+.resto__norating{
+  color:var(--muted);
+  font-size:.85rem;
+  font-style:italic;
+}
 .resto__name{transition:color .18s}
 .resto:hover .resto__name{color:var(--accent)}
 .resto__meta{line-height:1.5}
