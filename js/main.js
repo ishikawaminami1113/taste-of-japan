@@ -286,51 +286,106 @@
     if (el) navIO.observe(el);
   });
 
-  /* ---------- scroll reveal (starts after render, so layout is stable) ---------- */
+  /* ---------- scroll reveal ----------
+     Hidden state is applied inline by JS (not by a CSS class) so it is
+     guaranteed to take effect on the frame the element exists. The
+     .is-revealed class then clears those inline values so the CSS
+     transition in styles.css (.revealable) animates it back in.
+     If anything at all goes wrong, a fallback timer reveals everything,
+     so content can never be left stuck at opacity 0. */
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var REVEAL_SELECTOR = ".resto, .guide-card, .rule-list li, .conv-card, .faq-item, .photo-band, .conv-aside, .area-block, .article-body > *";
   var revealIO = null;
+  var revealAllDone = false;
+
+  function hideEl(el) {
+    el.classList.add("revealable");
+    el.style.opacity = "0";
+    el.style.transform = "translateY(16px)";
+  }
+  function showEl(el) {
+    if (el.classList.contains("is-revealed")) return;
+    el.classList.add("is-revealed");
+    el.style.opacity = "";
+    el.style.transform = "";
+  }
+  function revealEverything() {
+    if (revealAllDone) return;
+    revealAllDone = true;
+    // .reveal-all wins the cascade and drops the transition entirely, so
+    // this always lands on opacity:1 regardless of animation state.
+    document.documentElement.classList.add("reveal-all");
+    Array.prototype.forEach.call(document.querySelectorAll(REVEAL_SELECTOR), function (el) {
+      el.classList.add("is-revealed");
+      el.style.opacity = "";
+      el.style.transform = "";
+    });
+    if (revealIO) revealIO.disconnect();
+  }
+
   function initReveal() {
-    if (prefersReducedMotion || !("IntersectionObserver" in window) || revealIO) return;
-    var revealEls = document.querySelectorAll(".resto, .guide-card, .rule-list li, .conv-card, .faq-item, .photo-band, .conv-aside, .area-block, .article-body > *");
-    if (!revealEls.length) return;
-    // only hide elements once we know we'll reveal them
-    document.documentElement.classList.add("js-scroll");
+    if (revealAllDone) return;
+    if (prefersReducedMotion) { revealEverything(); return; }
+
+    var els = document.querySelectorAll(REVEAL_SELECTOR);
+    if (!els.length) return;
+
+    if (!("IntersectionObserver" in window)) { revealEverything(); return; }
+
+    // hide, then immediately reveal anything already on screen
+    Array.prototype.forEach.call(els, hideEl);
+
     revealIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) {
-          en.target.classList.add("revealed");
+          showEl(en.target);
           revealIO.unobserve(en.target);
         }
       });
     }, { threshold: 0, rootMargin: "0px 0px -8px 0px" });
-    revealEls.forEach(function (el) { el.dataset.revealObserved = "1"; revealIO.observe(el); });
-    // Safety net: reveal whatever is already on screen right away.
-    // Some headless/automated browsers don't fire the initial IO callback.
+    Array.prototype.forEach.call(els, function (el) { revealIO.observe(el); });
+
     function revealInView() {
-      revealEls.forEach(function (el) {
-        if (el.classList.contains("revealed")) return;
+      if (revealAllDone) return;
+      Array.prototype.forEach.call(els, function (el) {
+        if (el.classList.contains("is-revealed")) return;
         var r = el.getBoundingClientRect();
         if (r.top < window.innerHeight && r.bottom > 0) {
-          el.classList.add("revealed");
+          showEl(el);
           revealIO.unobserve(el);
         }
       });
     }
     requestAnimationFrame(revealInView);
-    setTimeout(revealInView, 120);
-    setTimeout(revealInView, 400);
+    setTimeout(revealInView, 100);
+    setTimeout(revealInView, 350);
+
+    // hard safety net: nothing may stay invisible
+    setTimeout(revealEverything, 4000);
+    window.addEventListener("beforeunload", revealEverything);
   }
+
   // observe any newly rendered elements (e.g. cards re-rendered by render())
   function observeNew() {
-    if (!revealIO || !document.documentElement.classList.contains("js-scroll")) return;
-    var fresh = document.querySelectorAll(".resto, .guide-card, .rule-list li, .conv-card, .faq-item, .photo-band, .conv-aside, .area-block, .article-body > *");
+    if (revealAllDone || prefersReducedMotion) return;
+    if (!("IntersectionObserver" in window)) { revealEverything(); return; }
+    var fresh = document.querySelectorAll(REVEAL_SELECTOR);
+    if (!fresh.length) return;
+    if (!revealIO) { initReveal(); return; }
     Array.prototype.forEach.call(fresh, function (el) {
-      if (!el.classList.contains("revealed") && !el.dataset.revealObserved) {
-        el.dataset.revealObserved = "1";
+      if (el.classList.contains("is-revealed") || el.dataset.revealObserved) return;
+      el.dataset.revealObserved = "1";
+      if (!el.classList.contains("revealable")) hideEl(el);
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) {
+        showEl(el);
+        revealIO.unobserve(el);
+      } else {
         revealIO.observe(el);
       }
     });
   }
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initReveal);
   } else {

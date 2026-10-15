@@ -420,25 +420,24 @@ img{max-width:100%}
 .section:nth-child(6){animation-delay:.25s}
 .section:nth-child(7){animation-delay:.3s}
 
-/* ---------- scroll reveal ---------- */
-/* Elements start hidden only when JS is present (see .js-scroll in <head>)
-   so the page still renders fully without JavaScript. */
-.js-scroll .resto,
-.js-scroll .guide-card,
-.js-scroll .rule-list li,
-.js-scroll .conv-card,
-.js-scroll .faq-item,
-.js-scroll .photo-band,
-.js-scroll .conv-aside,
-.js-scroll .area-block,
-.js-scroll .article-body > *{
-  opacity:0;
-  transform:translateY(16px);
+/* ---------- scroll reveal ----------
+   The hidden state is applied inline by JS (element.style) on the same
+   frame the element exists, then .is-revealed clears those inline values
+   so the transition can animate it back in. No-JS users never receive
+   inline styles, so the page always renders fully without JavaScript. */
+.revealable{
+  transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.3,1);
 }
-.js-scroll .revealed{
+.revealable.is-revealed{
   opacity:1;
   transform:none;
-  transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.3,1);
+}
+/* If anything stalls, never leave content hidden: this class is added by
+   the JS safety timer and forces the final state with no transition. */
+.reveal-all .revealable{
+  transition:none !important;
+  opacity:1 !important;
+  transform:none !important;
 }
 
 /* ---------- scroll progress bar ---------- */
