@@ -17,7 +17,7 @@
   "use strict";
 
   // ---- edit these two IDs to activate a tracker ----
-  var GA4_MEASUREMENT_ID = "";   // e.g. "G-ABC123DEF4"
+  var GA4_MEASUREMENT_ID = "G-M431X9CSS7";   // e.g. "G-ABC123DEF4"
   var CLARITY_PROJECT_ID  = "";   // e.g. "abc1def2g3"
 
   // ---- Google Analytics 4 (loads only if GA4_MEASUREMENT_ID is set) ----
