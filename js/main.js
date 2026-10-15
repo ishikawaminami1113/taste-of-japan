@@ -165,6 +165,7 @@
         if (rowEl) rowEl.classList.toggle("fav", added);
       });
     });
+    if (typeof observeNew === "function") observeNew();
   }
 
   /* ---------- modal ---------- */
@@ -285,18 +286,55 @@
     if (el) navIO.observe(el);
   });
 
-  /* ---------- scroll reveal ---------- */
-  var revealEls = document.querySelectorAll(".resto, .guide-card, .rule-list li, .conv-card, .faq-item, .photo-band, .conv-aside");
-  if ("IntersectionObserver" in window) {
-    var revealIO = new IntersectionObserver(function (entries) {
+  /* ---------- scroll reveal (starts after render, so layout is stable) ---------- */
+  var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var revealIO = null;
+  function initReveal() {
+    if (prefersReducedMotion || !("IntersectionObserver" in window) || revealIO) return;
+    var revealEls = document.querySelectorAll(".resto, .guide-card, .rule-list li, .conv-card, .faq-item, .photo-band, .conv-aside, .area-block, .article-body > *");
+    if (!revealEls.length) return;
+    // only hide elements once we know we'll reveal them
+    document.documentElement.classList.add("js-scroll");
+    revealIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) {
           en.target.classList.add("revealed");
           revealIO.unobserve(en.target);
         }
       });
-    }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
-    revealEls.forEach(function (el) { revealIO.observe(el); });
+    }, { threshold: 0, rootMargin: "0px 0px -8px 0px" });
+    revealEls.forEach(function (el) { el.dataset.revealObserved = "1"; revealIO.observe(el); });
+    // Safety net: reveal whatever is already on screen right away.
+    // Some headless/automated browsers don't fire the initial IO callback.
+    function revealInView() {
+      revealEls.forEach(function (el) {
+        if (el.classList.contains("revealed")) return;
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) {
+          el.classList.add("revealed");
+          revealIO.unobserve(el);
+        }
+      });
+    }
+    requestAnimationFrame(revealInView);
+    setTimeout(revealInView, 120);
+    setTimeout(revealInView, 400);
+  }
+  // observe any newly rendered elements (e.g. cards re-rendered by render())
+  function observeNew() {
+    if (!revealIO || !document.documentElement.classList.contains("js-scroll")) return;
+    var fresh = document.querySelectorAll(".resto, .guide-card, .rule-list li, .conv-card, .faq-item, .photo-band, .conv-aside, .area-block, .article-body > *");
+    Array.prototype.forEach.call(fresh, function (el) {
+      if (!el.classList.contains("revealed") && !el.dataset.revealObserved) {
+        el.dataset.revealObserved = "1";
+        revealIO.observe(el);
+      }
+    });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initReveal);
+  } else {
+    initReveal();
   }
 
   /* ---------- back to top ---------- */
@@ -309,6 +347,20 @@
     toTop.addEventListener("click", function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
+  }
+
+  /* ---------- scroll progress bar ---------- */
+  var progress = document.getElementById("progress");
+  if (progress) {
+    var updateProgress = function () {
+      var doc = document.documentElement;
+      var scrollable = doc.scrollHeight - doc.clientHeight;
+      var pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+      progress.style.width = Math.min(100, Math.max(0, pct)).toFixed(2) + "%";
+    };
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress, { passive: true });
+    updateProgress();
   }
 
   /* ---------- init ---------- */
